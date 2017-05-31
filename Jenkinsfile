@@ -46,5 +46,17 @@ node {
         sh "./mvnw package -Pprod -DskipTests"
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
+	
+	stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                echo 'Deploying'
+            }
+        }
 
 }
