@@ -48,7 +48,12 @@ node {
     }
 	
 	stage('quality analysis') {
-        withSonarQubeEnv('localhost') {
+		
+		tools {
+			sonarQube 'SonarQube Scanner 2.8'
+		}
+	
+        withSonarQubeEnv('SonarQube Scanner') {
             sh "./mvnw sonar:sonar"
         }
     }
