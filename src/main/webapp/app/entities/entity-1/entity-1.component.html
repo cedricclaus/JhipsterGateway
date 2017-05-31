@@ -1,0 +1,70 @@
+<div>
+    <h2>
+        <span>Entity 1 S</span>
+        <button class="btn btn-primary float-right create-entity-1" [routerLink]="['/', { outlets: { popup: ['entity-1-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span >
+            Create new Entity 1
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="entity1S">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="size"><span>Size</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="releaseDate"><span>Release Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span>Type</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let entity1 of entity1S ;trackBy: trackId">
+                <td><a [routerLink]="['../entity-1', entity1.id ]">{{entity1.id}}</a></td>
+                <td>{{entity1.name}}</td>
+                <td>{{entity1.size}}</td>
+                <td>{{entity1.releaseDate | date:'medium'}}</td>
+                <td>{{entity1.type}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../entity-1', entity1.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'entity-1/'+ entity1.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'entity-1/'+ entity1.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+        <div *ngIf="entity1S && entity1S.length">
+            <div class="row justify-content-center">
+                <jhi-item-count [page]="page" [total]="queryCount" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+            </div>
+            <div class="row justify-content-center">
+                <ngb-pagination [collectionSize]="totalItems" [(page)]="page" (pageChange)="loadPage(page)"></ngb-pagination>
+            </div>
+        </div>
+</div>
