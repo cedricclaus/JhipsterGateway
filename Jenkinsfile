@@ -47,6 +47,12 @@ node {
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
 	
+	stage('quality analysis') {
+        withSonarQubeEnv('sonar.yourict.net') {
+            sh "./mvnw sonar:sonar"
+        }
+    }
+	
 	stage('Sanity check') {          
         input "Does the staging environment look ok?"            
     }
