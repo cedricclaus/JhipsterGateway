@@ -48,7 +48,7 @@ node {
     }
 	
 	stage('quality analysis') {
-        withSonarQubeEnv('sonar.yourict.net') {
+        withSonarQubeEnv('localhost') {
             sh "./mvnw sonar:sonar"
         }
     }
