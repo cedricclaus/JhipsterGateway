@@ -49,11 +49,9 @@ node {
 	
 	stage('quality analysis') {
 		
-		tools {
-			sonarQube 'SonarQube Scanner 2.8'
-		}
+		
 	
-        withSonarQubeEnv('SonarQube Scanner') {
+        withSonarQubeEnv('SonarQube') {
             sh "./mvnw sonar:sonar"
         }
     }
