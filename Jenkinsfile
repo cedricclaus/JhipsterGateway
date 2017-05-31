@@ -47,16 +47,12 @@ node {
         archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
     }
 	
-	stage('Sanity check') {
-            steps {
-                input "Does the staging environment look ok?"
-            }
-        }
+	stage('Sanity check') {          
+        input "Does the staging environment look ok?"            
+    }
 
-        stage('Deploy - Production') {
-            steps {
-                echo 'Deploying'
-            }
-        }
+    stage('Deploy - Production') {
+		echo 'Deploying'            
+    }
 
 }
